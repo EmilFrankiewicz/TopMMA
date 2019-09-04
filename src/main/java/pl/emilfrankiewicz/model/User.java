@@ -1,30 +1,35 @@
 package pl.emilfrankiewicz.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.transaction.Transactional;
 
 @Entity
+@Transactional
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String name;
+	private String firstName;
 	private String nick;
 	private int age;
 	private String email;
 	private String password;
 
-	// private UserDetails userDetails;
+    @OneToOne(cascade = {CascadeType.ALL})
+	private UserDetails userDetails;
 
 	public User() {
 	}
 
 	public User(String name, String nick, int age, String email, String password) {
-		this.name = name;
+		this.firstName = name;
 		this.nick = nick;
 		this.age = age;
 		this.email = email;
@@ -39,12 +44,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getNick() {
@@ -79,10 +84,18 @@ public class User {
 		this.password = password;
 	}
 
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", nick=" + nick + ", age=" + age + ", email=" + email
-				+ ", password=" + password + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", nick=" + nick + ", age=" + age + ", email=" + email
+				+ ", password=" + password + ", userDetails=" + userDetails + "]";
 	}
 
 }
