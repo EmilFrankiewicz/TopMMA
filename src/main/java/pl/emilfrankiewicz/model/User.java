@@ -1,19 +1,26 @@
 package pl.emilfrankiewicz.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.transaction.Transactional;
+import javax.persistence.Table;
 
 @Entity
-@Transactional
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private long id;
 
 	private String firstName;
@@ -22,9 +29,18 @@ public class User {
 	private String email;
 	private String password;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_details")
 	private UserDetails userDetails;
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, orphanRemoval = true)
+	private List<Order> orders = new ArrayList<>();
+
+	  public void addOrder(Order order) {
+	        order.setUser(this);
+	        getOrders().add(order);
+	    }
+	  
 	public User() {
 	}
 
@@ -92,10 +108,18 @@ public class User {
 		this.userDetails = userDetails;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", nick=" + nick + ", age=" + age + ", email=" + email
-				+ ", password=" + password + ", userDetails=" + userDetails + "]";
+				+ ", password=" + password + ", userDetails=" + userDetails + ", orders=" + orders + "]";
 	}
 
 }

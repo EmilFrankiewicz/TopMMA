@@ -1,9 +1,5 @@
 package pl.emilfrankiewicz.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,18 +17,16 @@ public class UserDetails {
 	private String address;
 	private String gender;
 	private String lastName;
-	
-	@ElementCollection
-	private List<String> hobby = new ArrayList<>();
+	private String hobby;
 
-	public UserDetails() {
-	}
-
-	public UserDetails(String address, String gender, String lastName, List<String> hobby) {
+	public UserDetails(String address, String gender, String lastName, String hobby) {
 		this.address = address;
 		this.gender = gender;
 		this.lastName = lastName;
 		this.hobby = hobby;
+	}
+
+	public UserDetails() {
 	}
 
 	public long getId() {
@@ -67,18 +61,18 @@ public class UserDetails {
 		this.lastName = lastName;
 	}
 
-	public List<String> getHobby() {
+	public String getHobby() {
 		return hobby;
 	}
 
-	public void setHobby(List<String> hobby) {
+	public void setHobby(String hobby) {
 		this.hobby = hobby;
 	}
 
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", address=" + address + ", gender=" + gender + ", lastName=" + lastName
-				+ "]";
+				+ ", hobby=" + hobby + "]";
 	}
 
 }
