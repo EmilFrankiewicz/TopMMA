@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import pl.emilfrankiewicz.figterdatabase.model.FighterHeavyweight;
+
 @Entity
 @Table(name = "user_orders")
 public class Order {
@@ -33,7 +35,7 @@ public class Order {
 	@JoinTable(name = "order_of_fighter", joinColumns = {
 			@JoinColumn(name = "order_id", referencedColumnName = "id_order") }, inverseJoinColumns = {
 					@JoinColumn(name = "fighter_id", referencedColumnName = "id_fighter") })
-	private Set<Fighter> setOfFighter = new TreeSet<>();
+	private Set<FighterHeavyweight> setOfFighter = new TreeSet<>();
 
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
@@ -50,11 +52,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public Set<Fighter> getSetOfFighter() {
+	public Set<FighterHeavyweight> getSetOfFighter() {
 		return setOfFighter;
 	}
 
-	public void setSetOfFighter(Set<Fighter> setOfFighter) {
+	public void setSetOfFighter(Set<FighterHeavyweight> setOfFighter) {
 		this.setOfFighter = setOfFighter;
 	}
 
