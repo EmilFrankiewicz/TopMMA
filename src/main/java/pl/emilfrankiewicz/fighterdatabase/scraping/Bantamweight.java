@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,24 +7,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterBantamweight;
 
-import pl.emilfrankiewicz.figterdatabase.model.FighterWelterweight;
+public class Bantamweight {
 
-public class Welterweight {
+	private List<FighterBantamweight> listBantamweight;
 
-	private List<FighterWelterweight> listWelterweight;
-
-	public Welterweight() {
-		listWelterweight = new ArrayList<>();
+	public Bantamweight() {
+		listBantamweight = new ArrayList<>();
 	}
 
-	public List<FighterWelterweight> welterweight() throws IOException {
+	public List<FighterBantamweight> bantamweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/5/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/8/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterWelterweight fighterToParse = new FighterWelterweight();
+			FighterBantamweight fighterToParse = new FighterBantamweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -47,13 +46,13 @@ public class Welterweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listWelterweight.add(fighterToParse);
+			listBantamweight.add(fighterToParse);
 
 			// fighterData = doc.select("div.data").first();
 			// System.out.println(fighterData.text());
 			System.out.println("---------------");
 
 		}
-		return listWelterweight;
+		return listBantamweight;
 	}
 }

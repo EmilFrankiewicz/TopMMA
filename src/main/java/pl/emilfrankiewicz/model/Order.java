@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import pl.emilfrankiewicz.figterdatabase.model.FighterHeavyweight;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterHeavyweight;
 
 @Entity
 @Table(name = "user_orders")

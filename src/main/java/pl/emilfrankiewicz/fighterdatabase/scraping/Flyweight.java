@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,23 +7,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import pl.emilfrankiewicz.figterdatabase.model.FighterBantamweight;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterFlyweight;
 
-public class Bantamweight {
+public class Flyweight {
 
-	private List<FighterBantamweight> listBantamweight;
+	private List<FighterFlyweight> listFlyweight;
 
-	public Bantamweight() {
-		listBantamweight = new ArrayList<>();
+	public Flyweight() {
+		listFlyweight = new ArrayList<>();
 	}
 
-	public List<FighterBantamweight> bantamweight() throws IOException {
+	public List<FighterFlyweight> flyweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/8/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/9/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterBantamweight fighterToParse = new FighterBantamweight();
+			FighterFlyweight fighterToParse = new FighterFlyweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -46,13 +46,13 @@ public class Bantamweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listBantamweight.add(fighterToParse);
+			listFlyweight.add(fighterToParse);
 
 			// fighterData = doc.select("div.data").first();
 			// System.out.println(fighterData.text());
 			System.out.println("---------------");
 
 		}
-		return listBantamweight;
+		return listFlyweight;
 	}
 }

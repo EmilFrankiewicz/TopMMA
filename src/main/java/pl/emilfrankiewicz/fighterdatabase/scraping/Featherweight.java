@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,24 +7,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import pl.emilfrankiewicz.figterdatabase.model.FighterLightweight;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterFeatherweight;
 
+public class Featherweight {
 
-public class Lightweight {
+	private List<FighterFeatherweight> listFeatherweight;
 
-	private List<FighterLightweight> listLightweight;
-
-	public Lightweight() {
-		listLightweight = new ArrayList<>();
+	public Featherweight() {
+		listFeatherweight = new ArrayList<>();
 	}
 
-	public List<FighterLightweight> lightweight() throws IOException {
+	public List<FighterFeatherweight> featherweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/6/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/7/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterLightweight fighterToParse = new FighterLightweight();
+			FighterFeatherweight fighterToParse = new FighterFeatherweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -47,13 +46,13 @@ public class Lightweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listLightweight.add(fighterToParse);
+			listFeatherweight.add(fighterToParse);
 
 			// fighterData = doc.select("div.data").first();
 			// System.out.println(fighterData.text());
 			System.out.println("---------------");
 
 		}
-		return listLightweight;
+		return listFeatherweight;
 	}
 }

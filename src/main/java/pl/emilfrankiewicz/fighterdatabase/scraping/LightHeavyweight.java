@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,24 +7,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterLightHeavyweight;
 
-import pl.emilfrankiewicz.figterdatabase.model.FighterMiddleweight;
+public class LightHeavyweight {
 
-public class Middleweight {
+	private List<FighterLightHeavyweight> listLightHeavyweight;
 
-	private List<FighterMiddleweight> listMiddleweight;
-
-	public Middleweight() {
-		listMiddleweight = new ArrayList<>();
+	public LightHeavyweight() {
+		listLightHeavyweight = new ArrayList<>();
 	}
 
-	public List<FighterMiddleweight> middleweight() throws IOException {
+	public List<FighterLightHeavyweight> lightHeavyweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/4/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/3/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterMiddleweight fighterToParse = new FighterMiddleweight();
+			FighterLightHeavyweight fighterToParse = new FighterLightHeavyweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -47,13 +46,10 @@ public class Middleweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listMiddleweight.add(fighterToParse);
-
-			// fighterData = doc.select("div.data").first();
-			// System.out.println(fighterData.text());
+			listLightHeavyweight.add(fighterToParse);
 			System.out.println("---------------");
 
 		}
-		return listMiddleweight;
+		return listLightHeavyweight;
 	}
 }

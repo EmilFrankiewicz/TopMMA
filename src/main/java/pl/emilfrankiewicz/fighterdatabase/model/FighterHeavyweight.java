@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.model;
+package pl.emilfrankiewicz.fighterdatabase.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,9 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name = "fightersWelterweight")
-public class FighterWelterweight {
+@Table(name = "fightersHeavyweight")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+public class FighterHeavyweight {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +26,7 @@ public class FighterWelterweight {
 	private String category;
 	private String association;
 
-	public FighterWelterweight() {
+	public FighterHeavyweight() {
 	}
 
 	public long getId() {

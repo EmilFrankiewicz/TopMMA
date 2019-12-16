@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,23 +7,24 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import pl.emilfrankiewicz.figterdatabase.model.FighterFeatherweight;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterLightweight;
 
-public class Featherweight {
 
-	private List<FighterFeatherweight> listFeatherweight;
+public class Lightweight {
 
-	public Featherweight() {
-		listFeatherweight = new ArrayList<>();
+	private List<FighterLightweight> listLightweight;
+
+	public Lightweight() {
+		listLightweight = new ArrayList<>();
 	}
 
-	public List<FighterFeatherweight> featherweight() throws IOException {
+	public List<FighterLightweight> lightweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/7/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/6/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterFeatherweight fighterToParse = new FighterFeatherweight();
+			FighterLightweight fighterToParse = new FighterLightweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -46,13 +47,13 @@ public class Featherweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listFeatherweight.add(fighterToParse);
+			listLightweight.add(fighterToParse);
 
 			// fighterData = doc.select("div.data").first();
 			// System.out.println(fighterData.text());
 			System.out.println("---------------");
 
 		}
-		return listFeatherweight;
+		return listLightweight;
 	}
 }

@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.scraping;
+package pl.emilfrankiewicz.fighterdatabase.scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,23 +7,24 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import pl.emilfrankiewicz.figterdatabase.model.FighterLightHeavyweight;
 
-public class LightHeavyweight {
+import pl.emilfrankiewicz.fighterdatabase.model.FighterHeavyweight;
 
-	private List<FighterLightHeavyweight> listLightHeavyweight;
+public class Heavyweight {
 
-	public LightHeavyweight() {
-		listLightHeavyweight = new ArrayList<>();
+	private List<FighterHeavyweight> listHeavyweight;
+
+	public Heavyweight() {
+		listHeavyweight = new ArrayList<>();
 	}
 
-	public List<FighterLightHeavyweight> lightHeavyweight() throws IOException {
+	public List<FighterHeavyweight> heavyweight() throws IOException {
 
-		String url = "https://www.sherdog.com/news/rankings/3/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
+		String url = "https://www.sherdog.com/news/rankings/2/Sherdogs-Official-Mixed-Martial-Arts-Rankings-164999";
 		Document document = Jsoup.connect(url).get();
 		Elements fighters = document.select("h2 > a[href]");
 		for (Element fighter : fighters) {
-			FighterLightHeavyweight fighterToParse = new FighterLightHeavyweight();
+			FighterHeavyweight fighterToParse = new FighterHeavyweight();
 			System.out.println(fighter.text());
 			String fighterUrl = "https://www.sherdog.com" + fighter.attr("href");
 			Document doc = Jsoup.connect(fighterUrl).get();
@@ -46,10 +47,13 @@ public class LightHeavyweight {
 			fighterData = doc.select("span[itemprop=name]").first();
 			fighterToParse.setAssociation(fighterData.text().toString());
 
-			listLightHeavyweight.add(fighterToParse);
+			listHeavyweight.add(fighterToParse);
+
+			// fighterData = doc.select("div.data").first();
+			// System.out.println(fighterData.text());
 			System.out.println("---------------");
 
 		}
-		return listLightHeavyweight;
+		return listHeavyweight;
 	}
 }

@@ -1,8 +1,8 @@
-package pl.emilfrankiewicz.figterdatabase.repository;
+package pl.emilfrankiewicz.fighterdatabase.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.emilfrankiewicz.figterdatabase.model.FighterFeatherweight;
+import pl.emilfrankiewicz.fighterdatabase.model.FighterFeatherweight;
 
 @Repository
 public interface FeatherweightRepository extends JpaRepository<FighterFeatherweight, Long> {

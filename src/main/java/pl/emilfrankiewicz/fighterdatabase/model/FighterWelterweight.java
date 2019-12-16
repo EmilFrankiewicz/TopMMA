@@ -1,4 +1,4 @@
-package pl.emilfrankiewicz.figterdatabase.model;
+package pl.emilfrankiewicz.fighterdatabase.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fightersFlyweight")
-public class FighterFlyweight {
+@Table(name = "fightersWelterweight")
+public class FighterWelterweight {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class FighterFlyweight {
 	private String category;
 	private String association;
 
-	public FighterFlyweight() {
+	public FighterWelterweight() {
 	}
 
 	public long getId() {

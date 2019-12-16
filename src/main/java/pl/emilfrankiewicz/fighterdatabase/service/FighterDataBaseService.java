@@ -1,25 +1,25 @@
-package pl.emilfrankiewicz.figterdatabase.service;
+package pl.emilfrankiewicz.fighterdatabase.service;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.emilfrankiewicz.figterdatabase.repository.BantamweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.FeatherweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.FlyweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.HeavyweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.LightHeavyweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.LightweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.MiddleweightRepository;
-import pl.emilfrankiewicz.figterdatabase.repository.WelterweightRepository;
-import pl.emilfrankiewicz.figterdatabase.scraping.Bantamweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Featherweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Flyweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Heavyweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.LightHeavyweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Lightweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Middleweight;
-import pl.emilfrankiewicz.figterdatabase.scraping.Welterweight;
+import pl.emilfrankiewicz.fighterdatabase.repository.BantamweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.FeatherweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.FlyweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.HeavyweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.LightHeavyweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.LightweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.MiddleweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.repository.WelterweightRepository;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Bantamweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Featherweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Flyweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Heavyweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.LightHeavyweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Lightweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Middleweight;
+import pl.emilfrankiewicz.fighterdatabase.scraping.Welterweight;
 
 @Configuration
 public class FighterDataBaseService {
