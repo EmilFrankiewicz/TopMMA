@@ -37,7 +37,7 @@ public class Order {
 					@JoinColumn(name = "fighter_id", referencedColumnName = "id_fighter") })
 	private Set<FighterHeavyweight> setOfFighter = new TreeSet<>();
 
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -66,11 +66,6 @@ public class Order {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", setOfFighter=" + setOfFighter + ", user=" + user.getNick() + "]";
 	}
 
 }

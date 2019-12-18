@@ -80,4 +80,5 @@ public class FighterDataBaseService {
 		bantamweightRepository.saveAll(bantamweight.bantamweight());
 		flyweightRepository.saveAll(flyweight.flyweight());
 	}
+
 }

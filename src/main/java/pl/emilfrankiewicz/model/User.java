@@ -1,7 +1,10 @@
 package pl.emilfrankiewicz.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -24,9 +29,15 @@ public class User {
 	private long id;
 
 	private String firstName;
-	private String nick;
+
+	@NotEmpty
+	private String nickname;
 	private int age;
+
+	@NotEmpty
 	private String email;
+
+	@NotEmpty
 	private String password;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
@@ -36,17 +47,20 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Order> orders = new ArrayList<>();
 
-	  public void addOrder(Order order) {
-	        order.setUser(this);
-	        getOrders().add(order);
-	    }
-	  
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Set<UserRole> roles = new HashSet<>();
+
+	public void addOrder(Order order) {
+		order.setUser(this);
+		getOrders().add(order);
+	}
+
 	public User() {
 	}
 
 	public User(String name, String nick, int age, String email, String password) {
 		this.firstName = name;
-		this.nick = nick;
+		this.nickname = nick;
 		this.age = age;
 		this.email = email;
 		this.password = password;
@@ -68,12 +82,12 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public String getNick() {
-		return nick;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getAge() {
@@ -116,10 +130,12 @@ public class User {
 		this.orders = orders;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", nick=" + nick + ", age=" + age + ", email=" + email
-				+ ", password=" + password + ", userDetails=" + userDetails + ", orders=" + orders + "]";
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 }
