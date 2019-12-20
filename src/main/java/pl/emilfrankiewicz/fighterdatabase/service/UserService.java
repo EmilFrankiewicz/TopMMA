@@ -3,7 +3,10 @@ package pl.emilfrankiewicz.fighterdatabase.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import pl.emilfrankiewicz.dto.UserDetailsDTO;
 import pl.emilfrankiewicz.model.User;
+import pl.emilfrankiewicz.model.UserDetails;
 import pl.emilfrankiewicz.model.UserRole;
 import pl.emilfrankiewicz.repository.UserRepository;
 import pl.emilfrankiewicz.repository.UserRoleRepository;
@@ -47,8 +50,27 @@ public class UserService {
 		return userRepository.findByNickname(username);
 	}
 
+	public User getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
 	public void save(User user) {
 		userRepository.save(user);
+	}
+
+	public User setUserDetails(User user, UserDetailsDTO userToUpdateDTO) {
+
+		UserDetails userDetails = new UserDetails();
+
+		userDetails.setAddress(userToUpdateDTO.getAddress());
+		userDetails.setGender(userToUpdateDTO.getGender());
+		userDetails.setAge(userToUpdateDTO.getAge());
+		userDetails.setFirstName(userToUpdateDTO.getFirstName());
+		userDetails.setLastName(userToUpdateDTO.getLastName());
+
+		user.setUserDetails(userDetails);
+
+		return user;
 	}
 
 }

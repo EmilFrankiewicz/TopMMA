@@ -16,15 +16,9 @@ public class UserDetails {
 
 	private String address;
 	private String gender;
+	private int age;
+	private String firstName;
 	private String lastName;
-	private String hobby;
-
-	public UserDetails(String address, String gender, String lastName, String hobby) {
-		this.address = address;
-		this.gender = gender;
-		this.lastName = lastName;
-		this.hobby = hobby;
-	}
 
 	public UserDetails() {
 	}
@@ -53,26 +47,28 @@ public class UserDetails {
 		this.gender = gender;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public String getLastName() {
 		return lastName;
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getHobby() {
-		return hobby;
-	}
-
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDetails [id=" + id + ", address=" + address + ", gender=" + gender + ", lastName=" + lastName
-				+ ", hobby=" + hobby + "]";
 	}
 
 }

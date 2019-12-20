@@ -28,11 +28,8 @@ public class User {
 	@Column(name = "id_user")
 	private long id;
 
-	private String firstName;
-
 	@NotEmpty
 	private String nickname;
-	private int age;
 
 	@NotEmpty
 	private String email;
@@ -58,14 +55,6 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String nick, int age, String email, String password) {
-		this.firstName = name;
-		this.nickname = nick;
-		this.age = age;
-		this.email = email;
-		this.password = password;
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -74,28 +63,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getEmail() {
