@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import pl.emilfrankiewicz.fighterdatabase.model.FighterLightHeavyweight;
 
-public class LightHeavyweight {
+public class LightHeavyweight{
 
 	private List<FighterLightHeavyweight> listLightHeavyweight;
 

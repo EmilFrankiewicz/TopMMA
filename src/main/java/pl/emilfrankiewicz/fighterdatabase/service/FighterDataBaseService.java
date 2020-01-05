@@ -68,7 +68,7 @@ public class FighterDataBaseService {
 		flyweight = new Flyweight();
 	}
 
-	/*
+	
 	@Bean
 	public void runService() throws IOException {
 
@@ -81,5 +81,5 @@ public class FighterDataBaseService {
 		bantamweightRepository.saveAll(bantamweight.bantamweight());
 		flyweightRepository.saveAll(flyweight.flyweight());
 	}
-*/
+
 }
