@@ -185,4 +185,14 @@ public class Order {
 		this.listOfFighterFlyweight = listOfFighterFlyweight;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", listOfFighterHeavyweight=" + listOfFighterHeavyweight
+				+ ", listOfFighterLightHeavyweight=" + listOfFighterLightHeavyweight + ", listOfFighterMiddleweight="
+				+ listOfFighterMiddleweight + ", listOfFighterWelterweight=" + listOfFighterWelterweight
+				+ ", listOfFighterLightweight=" + listOfFighterLightweight + ", listOfFighterFeatherweight="
+				+ listOfFighterFeatherweight + ", listOfFighterBantamweight=" + listOfFighterBantamweight
+				+ ", listOfFighterFlyweight=" + listOfFighterFlyweight + "]";
+	}
+
 }

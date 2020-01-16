@@ -2,13 +2,22 @@ package pl.emilfrankiewicz.fighterdatabase.controller;
 
 import java.security.Principal;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import pl.emilfrankiewicz.dto.MailDTO;
 import pl.emilfrankiewicz.exceptions.ResourceDoesNotExistException;
 import pl.emilfrankiewicz.fighterdatabase.model.FighterBantamweight;
 import pl.emilfrankiewicz.fighterdatabase.model.FighterFeatherweight;
@@ -25,10 +34,12 @@ import pl.emilfrankiewicz.fighterdatabase.service.FlyweightService;
 import pl.emilfrankiewicz.fighterdatabase.service.HeavyweightService;
 import pl.emilfrankiewicz.fighterdatabase.service.LightHeavyweightService;
 import pl.emilfrankiewicz.fighterdatabase.service.LightweightService;
+import pl.emilfrankiewicz.fighterdatabase.service.MailService;
 import pl.emilfrankiewicz.fighterdatabase.service.MiddleweightService;
 import pl.emilfrankiewicz.fighterdatabase.service.OrderService;
 import pl.emilfrankiewicz.fighterdatabase.service.UserService;
 import pl.emilfrankiewicz.fighterdatabase.service.WelterweightService;
+import pl.emilfrankiewicz.model.Mail;
 import pl.emilfrankiewicz.model.Order;
 import pl.emilfrankiewicz.model.User;
 
@@ -46,6 +57,7 @@ public class FavoriteFightersController {
 	private FeatherweightService featherweightService;
 	private BantamweightService bantamweightService;
 	private FlyweightService flyweightService;
+	private MailService mailService;
 
 	@Autowired
 	public FavoriteFightersController(HeavyweightService heavyweightService, UserService userService,
@@ -53,7 +65,7 @@ public class FavoriteFightersController {
 			AddingToFavoritesService addingToFavoritesService, MiddleweightService middleweightService,
 			WelterweightService welterweightService, LightweightService lightweightService,
 			FeatherweightService featherweightService, BantamweightService bantamweightService,
-			FlyweightService flyweightService) {
+			FlyweightService flyweightService, MailService mailService) {
 		this.heavyweightService = heavyweightService;
 		this.userService = userService;
 		this.orderService = orderService;
@@ -65,6 +77,7 @@ public class FavoriteFightersController {
 		this.featherweightService = featherweightService;
 		this.bantamweightService = bantamweightService;
 		this.flyweightService = flyweightService;
+		this.mailService = mailService;
 	}
 
 	@RequestMapping(value = "/api/TopMMA/favorite/Heavyweight/{fighterId}", method = RequestMethod.POST)
@@ -187,7 +200,6 @@ public class FavoriteFightersController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-
 	@RequestMapping(value = "/api/TopMMA/favorite/{fighterId}", method = RequestMethod.GET)
 	public Order getUserOneFavoriteFighter(Principal principal, @PathVariable("fighterId") Long id)
 			throws ResourceDoesNotExistException {
@@ -234,6 +246,37 @@ public class FavoriteFightersController {
 
 		orderService.deleteUserFavoriteFighter(id, user.getId());
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+	@RequestMapping(value = "/api/TopMMA/email/", method = RequestMethod.GET)
+	public ResponseEntity<Mail> sendFavoriteToEmail(Principal principal, @Valid @RequestBody MailDTO mailDTO,
+			BindingResult result) throws ResourceDoesNotExistException, MessagingException {
+
+		if (result.hasErrors()) {
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError error : errors) {
+				System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
+
+			}
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+
+		String email = principal.getName();
+		User user = userService.getUserByEmail(email);
+
+		List<Order> orders = orderService.getAllUserFighter(user);
+
+		if (orders == null) {
+			throw new ResourceDoesNotExistException("List of favories fighter is empty.");
+		}
+
+		Mail mail = new Mail();
+		mail.setFrom(mailDTO.getFrom());
+		mail.setTo(mailDTO.getTo());
+		mail.setSubject(mailDTO.getSubject());
+		mail.setContent(orders.toString());
+		mailService.sendMail(mail);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 }

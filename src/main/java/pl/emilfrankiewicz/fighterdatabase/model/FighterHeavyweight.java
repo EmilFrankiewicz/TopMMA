@@ -84,4 +84,10 @@ public class FighterHeavyweight {
 		this.association = association;
 	}
 
+	@Override
+	public String toString() {
+		return "FighterHeavyweight [id=" + id + ", name=" + name + ", age=" + age + ", weight=" + weight + ", height="
+				+ height + ", category=" + category + ", association=" + association + "]";
+	}
+
 }
