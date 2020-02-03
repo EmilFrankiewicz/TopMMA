@@ -89,7 +89,7 @@ public class FavoriteFightersController {
 		FighterHeavyweight fighterToGet = heavyweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addHeavyweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -104,7 +104,7 @@ public class FavoriteFightersController {
 		FighterLightHeavyweight fighterToGet = lightHeavyweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addLightHeavyweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -119,7 +119,7 @@ public class FavoriteFightersController {
 		FighterMiddleweight fighterToGet = middleweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addMiddleweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -134,7 +134,7 @@ public class FavoriteFightersController {
 		FighterWelterweight fighterToGet = welterweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addWelterweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -149,7 +149,7 @@ public class FavoriteFightersController {
 		FighterLightweight fighterToGet = lightweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addLightweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -164,7 +164,7 @@ public class FavoriteFightersController {
 		FighterFeatherweight fighterToGet = featherweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addFeatherweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -179,7 +179,7 @@ public class FavoriteFightersController {
 		FighterBantamweight fighterToGet = bantamweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addBantamweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -194,7 +194,7 @@ public class FavoriteFightersController {
 		FighterFlyweight fighterToGet = flyweightService.getFighterbyId(id);
 
 		if (fighterToGet == null) {
-			throw new ResourceDoesNotExistException("Fighter not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		addingToFavoritesService.addFlyweightFighterToFavoriteList(id, email);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
