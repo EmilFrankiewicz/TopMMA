@@ -41,3 +41,12 @@ java -jar target/TopMMA-0.0.1-SNAPSHOT.jar
 ```
 
 ## Screens
+![DataBase](https://github.com/EmilFrankiewicz/TopMMA/blob/master/screens/db.png)
+
+![RegisterUser](https://github.com/EmilFrankiewicz/TopMMA/blob/master/screens/register.png)
+
+![AddUserDetails](https://github.com/EmilFrankiewicz/TopMMA/blob/master/screens/userdetails.png)
+
+![GetAllByCategory](https://github.com/EmilFrankiewicz/TopMMA/blob/master/screens/getallbycategory.png)
+
+![favoritelist](https://github.com/EmilFrankiewicz/TopMMA/blob/master/screens/favoritelist.png)
